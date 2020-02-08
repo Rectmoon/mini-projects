@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>animate login form</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <form action="login.html" class="login-form">
+      <h1>Login</h1>
+
+      <div class="lzx">
+        <input type="text" />
+        <span data-placeholder="Username" autocomplete="autocomplete"></span>
+      </div>
+
+      <div class="lzx">
+        <input type="password" autocomplete="autocomplete" />
+
+        <span data-placeholder="Password"></span>
+      </div>
+
+      <button type="button" onclick="javascript:onSubmit();return false;" class="login-btn">Submit</button>
+
+      <p class="tips">Don't have an account? <a href="register.html">Sign up</a></p>
+    </form>
+
+    <script>
+      const inputEls = document.querySelectorAll('.lzx input')
+
+      inputEls.forEach(el => {
+        el.addEventListener('focus', e => {
+          e.target.classList.add('focus')
+        })
+
+        el.addEventListener('blur', e => {
+          const el = e.target
+          el.value === '' && el.classList.remove('focus')
+        })
+      })
+
+      function onSubmit(e) {
+        console.log('submit')
+      }
+    </script>
+  </body>
+</html>
