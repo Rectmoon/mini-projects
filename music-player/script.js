@@ -1,14 +1,23 @@
-const audio = document.getElementById('audio')
-const musicContainer = document.getElementById('music-container')
+const audio = document.querySelector('audio')
+const musicContainer = document.querySelector('.music-container')
+const musicInfo = musicContainer.querySelector('.music-info')
 const post = document.querySelector('#post')
-const title = document.querySelector('#title')
-const progressContainer = document.getElementById('progress-container')
-const progress = document.getElementById('progress')
+const elTitle = document.querySelector('#title')
+
+const progressContainer = document.querySelector('.progress-container')
+const progress = progressContainer.querySelector('.progress')
+const currentDuration = progressContainer.querySelector('.current-duration')
+const totalDuration = progressContainer.querySelector('.total-duration')
+
 const lyricsContainer = document.querySelector('#lyrics-container')
-const lyricsList = document.getElementById('lyrics-list')
-const prevBtn = document.getElementById('prev')
-const playBtn = document.getElementById('play')
-const nextBtn = document.getElementById('next')
+const lyricsList = lyricsContainer.querySelector('#lyrics-list')
+
+const prevBtn = document.querySelector('#prev')
+
+const playBtn = document.querySelector('#play')
+const playIcon = playBtn.querySelector('i.fa')
+
+const nextBtn = document.querySelector('#next')
 
 const INTERVALDURATION = 1000
 let currentIndex = 0
@@ -17,6 +26,7 @@ let j = 1
 
 const data = [
   {
+    title: '刚好遇见你',
     img: 'http://imge.kugou.com/stdmusic/20161109/20161109171040932108.jpg',
     play_url:
       'https://webfs.yun.kugou.com/202002092209/171f2c0cf60aabece18ebc51d99ada6e/G078/M08/18/17/jg0DAFgi6G-AKqsqADDP_nSW5F4051.mp3',
@@ -24,6 +34,7 @@ const data = [
       '[id:$00000000]\r\n[ar:李玉刚]\r\n[ti:刚好遇见你]\r\n[by:]\r\n[hash:cb7ee97f4cc11c4ea7a1fa4b516a5d97]\r\n[al:]\r\n[sign:]\r\n[qq:]\r\n[total:0]\r\n[offset:0]\r\n[00:00.02]李玉刚 - 刚好遇见你\r\n[00:00.75]词：高进\r\n[00:00.85]曲：高进\r\n[00:00.94]编曲：关天天\r\n[00:13.13]我们哭了\r\n[00:15.79]我们笑着\r\n[00:18.83]我们抬头望天空\r\n[00:21.86]星星还亮着几颗\r\n[00:24.98]我们唱着\r\n[00:27.96]时间的歌\r\n[00:31.09]才懂得相互拥抱\r\n[00:33.98]到底是为了什么\r\n[00:37.30]因为我刚好遇见你\r\n[00:40.77]留下足迹才美丽\r\n[00:43.79]风吹花落泪如雨\r\n[00:46.80]因为不想分离\r\n[00:49.95]因为刚好遇见你\r\n[00:53.10]留下十年的期许\r\n[00:55.99]如果再相遇\r\n[00:59.21]我想我会记得你\r\n[01:14.32]我们哭了\r\n[01:17.23]我们笑着\r\n[01:20.34]我们抬头望天空\r\n[01:23.33]星星还亮着几颗\r\n[01:26.51]我们唱着\r\n[01:29.53]时间的歌\r\n[01:32.59]才懂得相互拥抱\r\n[01:35.59]到底是为了什么\r\n[01:38.73]因为我刚好遇见你\r\n[01:42.23]留下足迹才美丽\r\n[01:45.30]风吹花落泪如雨\r\n[01:48.39]因为不想分离\r\n[01:51.55]因为刚好遇见你\r\n[01:54.54]留下十年的期许\r\n[01:57.61]如果再相遇\r\n[02:00.81]我想我会记得你\r\n[02:03.99]因为刚好遇见你\r\n[02:06.86]留下足迹才美丽\r\n[02:09.94]风吹花落泪如雨\r\n[02:13.03]因为不想分离\r\n[02:16.06]因为刚好遇见你\r\n[02:19.16]留下十年的期许\r\n[02:22.21]如果再相遇\r\n[02:25.34]我想我会记得你\r\n[02:31.40]因为我刚好遇见你\r\n[02:34.51]留下足迹才美丽\r\n[02:37.59]风吹花落泪如雨\r\n[02:40.67]因为不想分离\r\n[02:43.77]因为刚好遇见你\r\n[02:46.84]留下十年的期许\r\n[02:49.94]如果再相遇\r\n[02:53.11]我想我会记得你\r\n'
   },
   {
+    title: '十年',
     img: 'http://imge.kugou.com/stdmusic/20160907/20160907172212861609.jpg',
     play_url: 'mp3/decades.mp3',
     lyrics:
@@ -34,9 +45,10 @@ const data = [
 initSong(data[j])
 
 function initSong(song) {
-  const { img, play_url, lyrics } = song
+  const { title, img, play_url, lyrics } = song
   post.src = img
   audio.src = play_url
+  elTitle.innerText = title
   initLyrics(lyrics)
 }
 
@@ -44,11 +56,7 @@ function initLyrics(lyrics) {
   clearInterval(timer)
   let lyricsArr = []
   lyrics.replace(/\[(\d{2})\:(\d{2})\.(?:\d{2})\](.*)/g, (_, minutes, seconds, content) => {
-    lyricsArr.push({
-      minutes,
-      seconds,
-      content
-    })
+    lyricsArr.push({ minutes, seconds, content })
   })
   lyricsList.innerHTML = ''
   lyricsArr.forEach(({ minutes, seconds, content }) => {
@@ -60,20 +68,19 @@ function initLyrics(lyrics) {
   lyricsList.style.transform = `translateY(0)`
 }
 
-function togglePlay() {
-  const isPlaying = musicContainer.classList.contains('playing')
-  isPlaying ? pauseSong() : playSong()
-}
-
 function updateLyricList() {
   const [...lyriclis] = lyricsList.querySelectorAll('li')
   const h = lyriclis[0].clientHeight
   const { currentTime } = audio
+  const currentInTime = Math.round(currentTime)
+
+  currentDuration.innerText = formatSeconds(currentInTime)
+
   let n
 
   for (let i in lyriclis) {
     const s = lyriclis[i].getAttribute('data-current') - 0
-    if (s === Math.round(currentTime)) {
+    if (s === currentInTime) {
       n = i
       break
     }
@@ -87,19 +94,28 @@ function updateLyricList() {
   }
 }
 
+function togglePlay() {
+  const isPlaying = musicContainer.classList.contains('playing')
+  isPlaying ? pauseSong() : playSong()
+}
+
 function playSong() {
   musicContainer.classList.add('playing')
-  playBtn.querySelector('i.fa').classList.remove('fa-play')
-  playBtn.querySelector('i.fa').classList.add('fa-pause')
+  playIcon.classList.remove('fa-play')
+  playIcon.classList.add('fa-pause')
   audio.play()
   clearInterval(timer)
   timer = setInterval(updateLyricList, INTERVALDURATION)
+  setTimeout(() => {
+    musicInfo.style.zIndex = 10
+  }, 300)
 }
 
 function pauseSong() {
+  musicInfo.style.zIndex = -10
   musicContainer.classList.remove('playing')
-  playBtn.querySelector('i.fa').classList.remove('fa-pause')
-  playBtn.querySelector('i.fa').classList.add('fa-play')
+  playIcon.classList.remove('fa-pause')
+  playIcon.classList.add('fa-play')
   audio.pause()
   clearInterval(timer)
 }
@@ -127,9 +143,25 @@ function setProgress(e) {
   audio.currentTime = (e.offsetX / this.clientWidth) * audio.duration
 }
 
+function insertO(x) {
+  return x < 10 ? `0${x}` : x
+}
+
+function formatSeconds(duration) {
+  const minutes = Math.floor(duration / 60)
+  const seconds = Math.round(duration - minutes * 60)
+  return `${insertO(minutes)}:${insertO(seconds)}`
+}
+
+function loadmetaData() {
+  const { duration } = this
+  totalDuration.innerText = formatSeconds(duration)
+}
+
 playBtn.addEventListener('click', togglePlay)
 prevBtn.addEventListener('click', prevSong)
 nextBtn.addEventListener('click', nextSong)
 audio.addEventListener('timeupdate', updateProgress)
 progressContainer.addEventListener('click', setProgress)
 audio.addEventListener('ended', pauseSong)
+audio.addEventListener('loadedmetadata', loadmetaData)

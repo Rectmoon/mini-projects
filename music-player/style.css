@@ -33,7 +33,7 @@ body {
 }
 
 .music-container .music-info {
-  background-color: lightblue;
+  background-color: rgba(255, 255, 255, 0.6);
   border-radius: 10px 10px 0 0;
   width: calc(100% - 40px);
   padding: 10px 10px 10px 150px;
@@ -42,8 +42,8 @@ body {
   left: 20px;
   transform: translateY(0);
   opacity: 0;
-  transition: transform 0.3s ease-in, opacity 0.3s ease-in;
-  z-index: 0;
+  transition: all 0.3s ease-in;
+  z-index: -10;
 }
 
 .music-container.playing .music-info {
@@ -54,10 +54,12 @@ body {
 .music-container .music-info .progress-container {
   background-color: #fff;
   cursor: pointer;
+  position: relative;
   margin: 10px 0;
   border-radius: 5px;
   width: 100%;
   height: 4px;
+  z-index: 100;
 }
 
 .music-container .music-info .progress-container .progress {
@@ -68,9 +70,28 @@ body {
   transition: width 0.1s linear;
 }
 
+.progress-container .duration {
+  text-align: right;
+  color: #333;
+  font-size: 12px;
+}
+
 .music-container .img-container {
   position: relative;
   width: 110px;
+}
+
+.music-container .img-container::after {
+  content: '';
+  background-color: #fff;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  transform: translate(-50%, 0%);
+  z-index: 11;
 }
 
 .music-container .img-container img {
@@ -81,6 +102,7 @@ body {
   position: absolute;
   left: 0;
   bottom: 0;
+  z-index: 11;
   animation: rotate 5s linear infinite;
   animation-play-state: paused;
 }
@@ -129,6 +151,7 @@ body {
 #lyrics-list li {
   color: #fff;
   font-size: 16px;
+  user-select: none;
   transition: 0.3s ease-in-out;
 }
 
