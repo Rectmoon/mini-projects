@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+li {
+  list-style: none;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(120deg, orange, white);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.music-container {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 20px 20px 0 orange;
+  display: flex;
+  padding: 20px 30px;
+  position: relative;
+  margin: 100px 0;
+}
+
+.music-container .music-info {
+  background-color: lightblue;
+  border-radius: 10px 10px 0 0;
+  width: calc(100% - 40px);
+  padding: 10px 10px 10px 150px;
+  position: absolute;
+  top: 0;
+  left: 20px;
+  transform: translateY(0);
+  opacity: 0;
+  transition: transform 0.3s ease-in, opacity 0.3s ease-in;
+  z-index: 0;
+}
+
+.music-container.playing .music-info {
+  opacity: 1;
+  transform: translateY(-100%);
+}
+
+.music-container .music-info .progress-container {
+  background-color: #fff;
+  cursor: pointer;
+  margin: 10px 0;
+  border-radius: 5px;
+  width: 100%;
+  height: 4px;
+}
+
+.music-container .music-info .progress-container .progress {
+  background-color: orange;
+  border-radius: 5px;
+  height: 100%;
+  width: 0;
+  transition: width 0.1s linear;
+}
+
+.music-container .img-container {
+  position: relative;
+  width: 110px;
+}
+
+.music-container .img-container img {
+  width: 100%;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  animation: rotate 5s linear infinite;
+  animation-play-state: paused;
+}
+
+.music-container.playing .img-container img {
+  animation-play-state: running;
+}
+
+.operation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.operation-btn {
+  background: #fff;
+  border: 0;
+  color: #dfdbdf;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 10px;
+  margin: 0 20px;
+}
+
+.operation-btn:hover {
+  color: #333;
+}
+
+#lyrics-container {
+  position: relative;
+  width: 100%;
+  height: 160px;
+  overflow: hidden;
+}
+
+#lyrics-list {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  text-align: center;
+  transition: 0.3s ease-in-out;
+}
+
+#lyrics-list li {
+  color: #fff;
+  font-size: 16px;
+  transition: 0.3s ease-in-out;
+}
+
+#lyrics-list li.current {
+  color: indigo;
+  font-size: 20px;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
