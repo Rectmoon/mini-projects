@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sample3</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <style type="text/css">
+      .loading {
+        box-sizing: content-box;
+        position: relative;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        border: 1px solid #95a5a6;
+        overflow: hidden;
+        text-align: center;
+        line-height: 50px;
+        animation: rotate-clockwise linear infinite;
+      }
+
+      .loading span {
+        position: absolute;
+        top: 40%;
+        left: -25%;
+        background: #e67e22;
+        opacity: 0.7;
+        width: 200%;
+        height: 200%;
+        border-radius: 33%;
+        animation: inherit;
+        animation-duration: 5s;
+      }
+
+      .loading span:nth-child(2) {
+        top: 45%;
+        left: -35%;
+        opacity: 0.5;
+        animation-duration: 7s;
+      }
+
+      .loading span:nth-child(3) {
+        top: 50%;
+        left: -35%;
+        opacity: 0.3;
+        animation-duration: 11s;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="loading">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </body>
+</html>

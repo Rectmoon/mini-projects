@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sample2</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <style type="text/css">
+      :root {
+        --box-size: 200px;
+      }
+
+      .loading {
+        position: relative;
+        width: var(--box-size);
+        height: var(--box-size);
+        border-radius: 50%;
+        border-top: 10px solid #e74c3c;
+        animation: rotate-clockwise 2s linear infinite;
+      }
+
+      .loading span {
+        position: absolute;
+        width: var(--box-size);
+        height: var(--box-size);
+        text-align: center;
+        line-height: var(--box-size);
+        animation: rotate-counterclockwise 2s linear infinite;
+      }
+
+      .loading::before,
+      .loading::after {
+        content: '';
+        width: var(--box-size);
+        height: var(--box-size);
+        border-radius: 50%;
+        position: absolute;
+        left: 0;
+        top: -10px;
+      }
+
+      .loading::before {
+        border-top: 10px solid #8e44ad;
+        transform: rotate(120deg);
+      }
+
+      .loading::after {
+        border-top: 10px solid #f1c40f;
+        transform: rotate(240deg);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="loading">
+      <span>loading</span>
+    </div>
+  </body>
+</html>
