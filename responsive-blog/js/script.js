@@ -40,7 +40,7 @@ $(function() {
     responsive: responsive
   })
 
-  $('.move-up span').click(function() {
+  $('.move-up').click(function() {
     $('html, body').animate({ scrollTop: 0 }, 1000)
   })
 
