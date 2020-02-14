@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sample10</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .loading {
+        font-size: 12px;
+        width: 11em;
+        height: 11em;
+        border-radius: 50%;
+        background: linear-gradient(to right, rgba(230, 126, 34, 1) 10%, rgba(230, 126, 34, 0) 42%);
+        position: relative;
+        animation: rotate-clockwise 1.4s infinite linear;
+      }
+
+      .loading::before,
+      .loading::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+
+      .loading::before {
+        background: #e67e22;
+        width: 50%;
+        height: 50%;
+        border-radius: 100% 0 0 0;
+      }
+
+      .loading::after {
+        background: #ecf0f1;
+        width: 85%;
+        height: 85%;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="loading"></div>
+  </body>
+</html>

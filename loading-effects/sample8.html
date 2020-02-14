@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sample8</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <style>
+      .loading {
+        border: 6px solid;
+        border-top-color: #bdc3c7;
+        border-right-color: #bdc3c7;
+        border-bottom-color: #8e44ad;
+        border-left-color: #bdc3c7;
+        animation: rotate-clockwise 1.6s linear infinite;
+      }
+
+      .loading,
+      .loading::after {
+        width: 10em;
+        height: 10em;
+        border-radius: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="loading"></div>
+  </body>
+</html>
