@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>sample6</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <style>
+      .loading {
+        width: 100px;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .loader {
+        position: absolute;
+        width: 100px;
+        height: 50px;
+        overflow: hidden;
+        transform-origin: center bottom;
+        animation: rotate-clockwise 2s cubic-bezier(0.175, 0.885, 0.32, 1.275) infinite;
+      }
+
+      .loader:nth-child(1) {
+        animation-delay: -50ms;
+      }
+
+      .loader:nth-child(2) {
+        animation-delay: -100ms;
+      }
+
+      .loader:nth-child(3) {
+        animation-delay: -150ms;
+      }
+
+      .loader:nth-child(4) {
+        animation-delay: -200ms;
+      }
+
+      .loader:nth-child(5) {
+        animation-delay: -250ms;
+      }
+
+      .loader::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 50px;
+        height: 50px;
+        border: 4px solid transparent;
+        transform: translate(-50%);
+        border-radius: 50%;
+      }
+
+      .loader:nth-child(1)::after {
+        border-color: #2980b9;
+        width: 90px;
+        height: 90px;
+        top: 5px;
+      }
+
+      .loader:nth-child(2)::after {
+        border-color: #e67e22;
+        width: 76px;
+        height: 76px;
+        top: 12px;
+      }
+
+      .loader:nth-child(3)::after {
+        border-color: #8e44ad;
+        width: 62px;
+        height: 62px;
+        top: 19px;
+      }
+
+      .loader:nth-child(4)::after {
+        border-color: #f1c40f;
+        width: 48px;
+        height: 48px;
+        top: 26px;
+      }
+
+      .loader:nth-child(5)::after {
+        border-color: #d35400;
+        width: 34px;
+        height: 34px;
+        top: 33px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="loading">
+      <div class="loader"></div>
+      <div class="loader"></div>
+      <div class="loader"></div>
+      <div class="loader"></div>
+      <div class="loader"></div>
+    </div>
+  </body>
+</html>

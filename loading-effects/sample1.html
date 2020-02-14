@@ -3,50 +3,89 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>sample1</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>sample7</title>
     <link rel="stylesheet" href="style.css" />
 
-    <style type="text/css">
+    <style>
       :root {
-        --lbox-size: 10px;
-        --loading-desc: 2s linear infinite;
+        --box-size: 10px;
+        --min-size: calc(0.5 * var(--box-size));
+        --mid-size: calc(2 * var(--box-size));
+        --max-size: calc(5 * var(--box-size));
+
+        --color-1: rgba(225, 20, 98, 0.75);
+        --color-2: rgba(111, 202, 220, 0.75);
+        --color-3: rgba(61, 184, 143, 0.75);
+        --color-4: rgba(233, 169, 32, 0.75);
       }
 
       .loading {
-        width: var(--lbox-size);
-        height: var(--lbox-size);
-        border-radius: 50%;
-        transform: rotate(75deg);
-        animation: rotate-clockwise var(--loading-desc);
+        position: relative;
+        width: var(--max-size);
+        height: var(--max-size);
+        transform: rotate(165deg);
       }
 
-      .loading::before,
-      .loading::after {
+      .loading:before,
+      .loading:after {
         content: '';
         position: absolute;
-        left: 50%;
         top: 50%;
+        left: 50%;
+        display: block;
+        width: var(--box-size);
+        height: var(--box-size);
+        border-radius: var(--min-size);
         transform: translate(-50%, -50%);
-        width: var(--lbox-size);
-        height: var(--lbox-size);
-        border-radius: var(--lbox-size);
-        animation: loading var(--loading-desc);
       }
 
-      .loading::before {
-        box-shadow: var(--lbox-size) var(--lbox-size) #2980b9,
-          calc(-1 * var(--lbox-size)) calc(-1 * var(--lbox-size)) #8e44ad;
+      .loading:before {
+        animation: before 2s infinite;
       }
 
-      .loading::after {
-        box-shadow: var(--lbox-size) var(--lbox-size) #c0392b,
-          calc(-1 * var(--lbox-size)) calc(-1 * var(--lbox-size)) #16a085;
-        transform: translate(-50%, -50%) rotate(90deg);
+      .loading:after {
+        animation: after 2s infinite;
       }
 
-      @keyframes loading {
-        50% {
-          width: calc(var(--lbox-size) * 3);
+      @keyframes before {
+        0% {
+          width: var(--box-size);
+          box-shadow: var(--mid-size) calc(-1 * var(--box-size)) var(--color-1),
+            calc(-1 * var(--mid-size)) var(--box-size) var(--color-2);
+        }
+        35% {
+          width: var(--max-size);
+          box-shadow: 0 calc(-1 * var(--box-size)) var(--color-1), 0 var(--box-size) var(--color-2);
+        }
+        70% {
+          width: var(--box-size);
+          box-shadow: calc(-1 * var(--mid-size)) calc(-1 * var(--box-size)) var(--color-1),
+            var(--mid-size) var(--box-size) var(--color-2);
+        }
+        100% {
+          box-shadow: var(--mid-size) calc(-1 * var(--box-size)) var(--color-1),
+            calc(-1 * var(--mid-size)) var(--box-size) var(--color-2);
+        }
+      }
+      @keyframes after {
+        0% {
+          height: var(--box-size);
+          box-shadow: var(--box-size) var(--mid-size) var(--color-3),
+            calc(-1 * var(--box-size)) calc(-1 * var(--mid-size)) var(--color-4);
+        }
+        35% {
+          height: var(--max-size);
+          box-shadow: var(--box-size) 0 var(--color-3), calc(-1 * var(--box-size)) 0 var(--color-4);
+        }
+        70% {
+          height: var(--box-size);
+          box-shadow: var(--box-size) calc(-1 * var(--mid-size)) var(--color-3),
+            calc(-1 * var(--box-size)) var(--mid-size) var(--color-4);
+        }
+        100% {
+          box-shadow: var(--box-size) var(--mid-size) var(--color-3),
+            calc(-1 * var(--box-size)) calc(-1 * var(--mid-size)) var(--color-4);
         }
       }
     </style>
