@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=6yAoynmTPNlTBa8z1X4LfwGE"></script>
+    <script type="text/javascript" src="http://developer.baidu.com/map/jsdemo/demo/convertor.js"></script>
+    <script src="skycons.js"></script>
+  </head>
+  <body>
+    <div class="location">
+      <h1 class="location-timezone">时区</h1>
+      <canvas id="weather" class="icon" width="75" height="75"></canvas>
+    </div>
+
+    <div class="temperature">
+      <strong class="degree">36</strong>
+      <span class="temperature-unit">℃</span>
+    </div>
+
+    <div class="description">It feels a litte cold.</div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

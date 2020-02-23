@@ -1,0 +1,101 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --theme-color: white;
+  --accent-color: #e84118;
+  --transition-args: 1s ease-in-out;
+  --text-color: #000;
+  --button-text-color: var(--theme-color);
+}
+
+body.dark {
+  --theme-color: #353b48;
+  --accent-color: #f1c40f;
+  --text-color: #fff;
+}
+
+body {
+  background-color: var(--theme-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: var(--transition-args);
+  overflow: hidden;
+}
+
+.title {
+  margin-bottom: 0.5rem;
+}
+
+.theme-swapper {
+  background-color: var(--accent-color);
+  color: var(--button-text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding: 0.5em 1em;
+  border-radius: 0.3em;
+  border: none;
+  outline: none;
+  transition: var(--transition-args);
+  transform: scale(1);
+}
+
+.theme-swapper:hover,
+.theme-swapper:focus {
+  transform: scale(1.2);
+}
+
+.theme-swapper .icon {
+  margin-right: 0.5em;
+}
+
+.container {
+  --rotation: 0;
+  position: absolute;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  top: 0;
+  height: 200vmin;
+  transition: transform var(--transition-args);
+  transform: rotate(calc(var(--rotation) * 1deg));
+}
+
+.container .icon {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  transition: opacity, fill, var(--transition-args);
+  fill: var(--accent-color);
+}
+
+.sun {
+  top: 5%;
+  opacity: 1;
+}
+
+.dark .sun {
+  opacity: 0;
+}
+
+.moon {
+  bottom: 5%;
+  opacity: 0;
+  transform: rotate(180deg);
+}
+
+.dark .moon {
+  opacity: 1;
+}

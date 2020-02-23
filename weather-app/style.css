@@ -1,0 +1,45 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: linear-gradient(120deg, #40739e, #8c7ae6);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  user-select: none;
+}
+
+.location {
+  height: 30vh;
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.location .icon {
+  margin-left: 20px;
+}
+
+.temperature {
+  color: #fd79a8;
+  font-size: 32px;
+  margin-bottom: 4rem;
+}
+
+.temperature-unit {
+  cursor: pointer;
+}
+
+.description {
+  font-size: 20px;
+  font-weight: 500;
+}
