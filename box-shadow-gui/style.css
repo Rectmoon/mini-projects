@@ -1,0 +1,75 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --default-background-color: #fff;
+  --default-box-color: #f6e58d;
+  --default-shadow-color: #000;
+  --default-sidebar-color: #ff7979;
+}
+
+body {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr minmax(130px, 20%);
+  background: var(--background-color, --default-background-color);
+}
+
+.container {
+  position: relative;
+  justify-self: center;
+  align-self: center;
+}
+
+#box {
+  width: 200px;
+  height: 200px;
+  margin: 20px;
+  background: var(--box-color, var(--default-box-color));
+  box-shadow: calc(var(--dx, 3) * 1px) calc(var(--dy, 3) * 1px) calc(var(--blur, 4) * 1px) calc(var(--spread, 4) * 1px)
+    var(--shadow-color, var(--default-shadow-color));
+}
+
+.settings {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5em 1em;
+  background: var(--sidebar-color, var(--default-sidebar-color));
+  color: var(--default-background-color);
+}
+
+.settings label {
+  text-transform: capitalize;
+  margin: 0.75rem 0 0.15rem 0;
+  font-weight: bold;
+}
+
+input:not([type='color']) {
+  padding: 0.25em 0.5em;
+  font-family: serif;
+  border: 1px solid transparent;
+  outline: none;
+  border-radius: 0.3em;
+}
+
+input:not([type='color']):focus {
+  border-color: #0af;
+}
+
+.divider {
+  margin: 1rem -1rem 0.4rem -1rem;
+  border-bottom: 1px solid #999;
+}
+
+input[type='color'] {
+  width: 100%;
+  border-radius: 0.3em;
+  background-color: var(--default-background-color);
+  border: none;
+  cursor: pointer;
+}
