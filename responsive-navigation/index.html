@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Navigation</title>
+    <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="layout">
+        <a href="#" class="logo"><img src="logo.png" alt=""/></a>
+        <i class="menu-toggle-btn fas fa-bars"></i>
+        <nav class="navigation-menu">
+          <a href="#"><i class="fas fa-home home"></i> Home</a>
+          <a href="#"><i class="fas fa-align-left about"></i>About</a>
+          <a href="#"><i class="fab fa-buffer works"></i>Works</a>
+          <a href="#"><i class="fas fa-users team"></i>Team</a>
+          <a href="#"><i class="fas fa-headset contact"></i>Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <script>
+      const toggle = document.querySelector('.menu-toggle-btn')
+      const menu = document.querySelector('.navigation-menu')
+      toggle.addEventListener('click', function() {
+        this.classList.toggle('fa-times')
+        menu.classList.toggle('active')
+      })
+    </script>
+  </body>
+</html>
