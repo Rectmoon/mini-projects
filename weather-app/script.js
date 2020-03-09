@@ -10,19 +10,23 @@ const temperatureMap = { [C]: '', [F]: '' }
 const sc = new Skycons({ color: 'white' })
 sc.add('weather', Skycons.CLEAR_DAY)
 
-function fetchWeatherInfo(api) {
-  return fetch(api)
-    .then(resp => resp.json())
-    .catch(e => console.error(e))
+function initIcon(id, icon) {
+  const currentIcon = icon.replace(/-/g, '_').toUpperCase()
+  sc.set(id, Skycons[currentIcon])
+  sc.play()
+
+  temperatureUnit.addEventListener('click', function() {
+    if (this.textContent === C) {
+      this.textContent = F
+      degree.textContent = temperatureMap[F]
+    } else {
+      this.textContent = C
+      degree.textContent = temperatureMap[C]
+    }
+  })
 }
 
-const geolocation = new BMap.Geolocation()
-geolocation.getCurrentPosition(function(r) {
-  if (this.getStatus() == BMAP_STATUS_SUCCESS) {
-    const { lat, lng } = r.point
-    handleGetPosition(lat, lng)
-  }
-})
+const fetchWeatherInfo = api => fetch(api).then(resp => resp.json())
 
 async function handleGetPosition(lat, lon) {
   try {
@@ -41,18 +45,9 @@ async function handleGetPosition(lat, lon) {
   }
 }
 
-function initIcon(id, icon) {
-  const currentIcon = icon.replace(/-/g, '_').toUpperCase()
-  sc.set(id, Skycons[currentIcon])
-  sc.play()
-
-  temperatureUnit.addEventListener('click', function() {
-    if (this.textContent === C) {
-      this.textContent = F
-      degree.textContent = temperatureMap[F]
-    } else {
-      this.textContent = C
-      degree.textContent = temperatureMap[C]
-    }
-  })
-}
+new BMap.Geolocation().getCurrentPosition(function(r) {
+  if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+    const { lat, lng } = r.point
+    handleGetPosition(lat, lng)
+  }
+})
