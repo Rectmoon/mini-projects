@@ -1,0 +1,61 @@
+body {
+  margin: 4px;
+  font-family: Helvetica;
+}
+
+.waterfall.flex {
+  display: flex;
+  flex-flow: column wrap;
+  height: 900px;
+}
+
+.item {
+  position: relative;
+  padding: 2px;
+  counter-increment: item-counter;
+}
+
+.flex .item {
+  width: 25%;
+  box-sizing: border-box;
+}
+
+.waterfall.column {
+  column-count: 4;
+  column-gap: 0;
+}
+
+.item img {
+  display: block;
+  width: 100%;
+}
+
+.item::after {
+  position: absolute;
+  display: block;
+  left: 2px;
+  top: 2px;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  line-height: 24px;
+  background-color: #000;
+  color: #fff;
+  content: counter(item-counter);
+}
+
+.item:nth-child(4n + 1) {
+  order: 1;
+}
+
+.item:nth-child(4n + 2) {
+  order: 2;
+}
+
+.item:nth-child(4n + 3) {
+  order: 3;
+}
+
+.item:nth-child(4n) {
+  order: 4;
+}

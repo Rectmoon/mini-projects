@@ -1,0 +1,74 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #000;
+  height: 44px;
+}
+
+.hamburger-container {
+  display: block;
+  width: 20px;
+  height: 20px;
+  position: relative;
+  left: 10px;
+  top: 16px;
+  cursor: pointer;
+}
+
+.hamburger-container span {
+  display: block;
+  height: 1px;
+  background-color: #fff;
+  position: relative;
+  transition: transform 0.3s ease-in-out, top 0.3s ease-in-out 0.3s;
+  top: 0;
+}
+
+.hamburger-container span:nth-child(2) {
+  margin-top: 7px;
+}
+
+#toggler {
+  display: none;
+}
+
+#toggler:checked + label .hamburger-container span:nth-child(1) {
+  transform: rotate(45deg);
+  top: 4px;
+  transition: top 0.3s ease-in-out, transform 0.3s ease-in-out 0.3s;
+}
+
+#toggler:checked + label .hamburger-container span:nth-child(2) {
+  transform: rotate(-45deg);
+  top: -4px;
+  transition: top 0.3s ease-in-out, transform 0.3s ease-in-out 0.3s;
+}
+
+.nav-items {
+  background-color: rgba(0, 0, 0, 0.82);
+  width: 100%;
+  height: calc(100vh - 44px);
+  position: absolute;
+  top: 44px;
+  left: 0;
+  transform: scaleY(0);
+  transition: transform 0.3s ease-in-out 0.3s, opacity 0.3s ease-in-out 0.3s;
+  transform-origin: 50% 0;
+  opacity: 0;
+}
+
+#toggler:checked ~ .nav-items {
+  transform: scaleY(1);
+  opacity: 1;
+}
+
+nav {
+  margin-top: 1em;
+}
+
+nav li {
+  color: #fff;
+}
