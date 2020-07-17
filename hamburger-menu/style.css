@@ -14,7 +14,7 @@ header {
   height: 20px;
   position: relative;
   left: 10px;
-  top: 16px;
+  top: 12px;
   cursor: pointer;
 }
 
@@ -24,11 +24,16 @@ header {
   background-color: #fff;
   position: relative;
   transition: transform 0.3s ease-in-out, top 0.3s ease-in-out 0.3s;
+  transform-origin: center center;
   top: 0;
 }
 
+.hamburger-container span:nth-child(1) {
+  top: 5px;
+}
+
 .hamburger-container span:nth-child(2) {
-  margin-top: 7px;
+  top: 12px;
 }
 
 #toggler {
@@ -37,13 +42,13 @@ header {
 
 #toggler:checked + label .hamburger-container span:nth-child(1) {
   transform: rotate(45deg);
-  top: 4px;
+  top: 9px;
   transition: top 0.3s ease-in-out, transform 0.3s ease-in-out 0.3s;
 }
 
 #toggler:checked + label .hamburger-container span:nth-child(2) {
   transform: rotate(-45deg);
-  top: -4px;
+  top: 8px;
   transition: top 0.3s ease-in-out, transform 0.3s ease-in-out 0.3s;
 }
 
@@ -71,4 +76,6 @@ nav {
 
 nav li {
   color: #fff;
+  list-style: none;
+  padding: 4px 10px;
 }
