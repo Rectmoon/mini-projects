@@ -1,0 +1,40 @@
+html {
+  font-size: 12px;
+}
+
+body {
+  font-family: Helvetica, sans-serif;
+  color: #333;
+  width: 75%;
+  margin: auto;
+}
+
+h1 {
+  font-size: 4rem;
+}
+
+p {
+  font-size: 3rem;
+  line-height: 3.8rem;
+  margin: 2.5rem;
+  letter-spacing: 0.05rem;
+}
+
+mark {
+  background: transparent;
+  color: inherit;
+  background-image: linear-gradient(#0abde3, orange);
+  background-repeat: no-repeat;
+  background-size: 0% 38%;
+  background-position: 0 100%;
+}
+
+mark.animate {
+  animation: highlight 4s ease-in-out forwards;
+}
+
+@keyframes highlight {
+  to {
+    background-size: 100% 38%;
+  }
+}

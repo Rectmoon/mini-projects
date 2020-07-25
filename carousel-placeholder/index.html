@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carousel Placeholder</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <label
+        :data-before="before"
+        :data-after="after"
+        :class="{animate: shouldAnimate}"
+        @animationend="handleAnimationend"
+      >
+        <input
+          type="text"
+          v-model="value"
+          :placeholder="placeholder"
+          @focus="isFocusing=true"
+          @blur="isFocusing=false"
+          @keydown.enter="handleSearch"
+        />
+      </label>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
