@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sample15</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .loading {
+        width: 100px;
+        height: 40px;
+        background-color: orange;
+        border-radius: 40px;
+        transform-origin: center center;
+        transform: translateY(-6px) rotate(10deg);
+        animation: loading linear 1s infinite;
+      }
+
+      @keyframes loading {
+        20%,
+        80% {
+          transform: translateY(-16px) rotate(0deg);
+        }
+
+        60% {
+          transform: translateY(-6px) rotate(-10deg);
+        }
+
+        100% {
+          transform: translateY(-6px) rotate(10deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="loading"></div>
+      <hr />
+    </div>
+  </body>
+</html>
