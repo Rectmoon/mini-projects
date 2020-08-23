@@ -11,7 +11,6 @@ class Masonry {
     this.columnWidth = columnWidth
     this.gapWidth = gapWidth
     this.gapHeight = gapHeight
-
     this.container = container
     this.columnCount = 0
     this.columnHeights = []
@@ -95,7 +94,6 @@ class Masonry {
           <img src=${picture.src} width=${
         this.columnWidth
       } height=${(picture.width * picture.height) / this.columnWidth}/>
-      123
         </div>
       `
       cells.push(cell)
