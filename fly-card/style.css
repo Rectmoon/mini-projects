@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 html,
@@ -14,22 +15,30 @@ body {
   position: relative;
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
 }
 
 img {
-  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border: none;
 }
 
 body {
   overflow: hidden;
 }
 
-.fly-card-wrapper {
+.action-name {
+  color: #fff;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 10px 20px;
+  font-size: 24px;
   position: absolute;
+  z-index: 999;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -42,9 +51,9 @@ body {
   overflow: hidden;
 }
 
-.fly-card.animation {
-  transition: opacity 0.4s ease-out, left 0.4s ease-out, top 0.4s ease-out,
-    width 0.4s ease-in, height 0.4s ease-out;
+.fly-card.has-animation {
+  transition: opacity 0.4s ease-in-out, left 0.4s ease-in-out,
+    top 0.4s ease-in-out, width 0.4s ease-in-out, height 0.4s ease-in-out;
 }
 
 .fly-card.has--shadow {

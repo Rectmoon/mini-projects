@@ -13,12 +13,12 @@ Vue.component('fly-card', {
       default: 300
     },
     // 卡片层叠的横向边距
-    leftPad: {
+    paddingLeft: {
       type: Number,
       default: 10
     },
     // 卡片层叠的纵向边距
-    topPad: {
+    paddingTop: {
       type: Number,
       default: 6
     },
@@ -57,6 +57,7 @@ Vue.component('fly-card', {
   data () {
     return {
       isAnimating: false,
+      isThrowed: false,
       left: 0,
       top: 0,
       startLeft: 0,
@@ -67,6 +68,7 @@ Vue.component('fly-card', {
   computed: {
     flyCardWrapperStyle () {
       return {
+        position: 'relative',
         width: this.cardWidth + 'px',
         height: this.cardHeight + 'px'
       }
@@ -75,54 +77,74 @@ Vue.component('fly-card', {
     firstCardClass () {
       return {
         'has--shadow': this.hasShadow,
-        'has--border': this.hasShadow,
-        animation: this.isAnimating
+        'has--border': this.hasBorder,
+        'has-animation': this.isAnimating
+      }
+    },
+
+    largeCardStyle () {
+      return {
+        width: this.cardWidth + 'px',
+        height: this.cardHeight + 'px',
+        left: 0,
+        top: 0
+      }
+    },
+
+    middleCardStyle () {
+      return {
+        width: this.cardWidth - this.paddingLeft * 2 + 'px',
+        height: this.cardHeight - this.paddingTop * 2 + 'px',
+        left: this.paddingLeft + 'px',
+        top: this.paddingTop * 3 + 'px'
+      }
+    },
+
+    smallCardStyle () {
+      return {
+        width: this.cardWidth - this.paddingLeft * 4 + 'px',
+        height: this.cardHeight - this.paddingTop * 4 + 'px',
+        left: this.paddingLeft * 2 + 'px',
+        top: this.paddingTop * 6 + 'px'
       }
     },
 
     firstCardStyle () {
       return {
+        ...this.largeCardStyle,
         left: this.left + 'px',
-        top: this.top + 'px',
-        zIndex: 13
+        top: this.top + 'px'
       }
     },
 
     secondCardStyle () {
-      return {
-        width: this.cardWidth - this.leftPad * 2 + 'px',
-        height: this.cardHeight - this.topPad * 2 + 'px',
-        left: this.leftPad + 'px',
-        top: this.topPad * 3 + 'px',
-        zIndex: 12
-      }
+      return this.isThrowed ? this.largeCardStyle : this.middleCardStyle
     },
 
     thirdCardStyle () {
-      return {
-        width: this.cardWidth - this.leftPad * 4 + 'px',
-        height: this.cardHeight - this.topPad * 4 + 'px',
-        left: this.leftPad * 2 + 'px',
-        top: this.topPad * 6 + 'px',
-        zIndex: 11
-      }
+      return this.isThrowed ? this.middleCardStyle : this.smallCardStyle
     },
 
     forthCardStyle () {
-      return {
-        width: this.cardWidth - this.leftPad * 6 + 'px',
-        height: this.cardHeight - this.topPad * 6 + 'px',
-        left: this.leftPad * 3 + 'px',
-        top: this.topPad * 9 + 'px',
-        zIndex: 10
-      }
+      return this.isThrowed
+        ? {
+            ...this.smallCardStyle,
+            opacity: 1
+          }
+        : {
+            width: this.cardWidth - this.paddingLeft * 6 + 'px',
+            height: this.cardHeight - this.paddingTop * 6 + 'px',
+            left: this.paddingLeft * 3 + 'px',
+            top: this.paddingTop * 9 + 'px',
+            opacity: 0
+          }
     }
   },
 
   methods: {
     getDistance: function ({ x: x1, y: y1 }, { x: x2, y: y2 }) {
-      const dx = Math.abs(x1 - x2)
-      const dy = Math.abs(x1 - x2)
+      const dx = Math.abs(x2 - x1)
+      const dy = Math.abs(y2 - y1)
 
       return Math.sqrt(dx * dx + dy * dy)
     },
@@ -133,6 +155,7 @@ Vue.component('fly-card', {
 
         this.startLeft = clientX - this.left
         this.startTop = clientY - this.top
+        this.$emit('on-drag-start')
       }
     },
 
@@ -158,7 +181,11 @@ Vue.component('fly-card', {
         { x: 0, y: 0 },
         { x: this.left, y: this.top }
       )
-      this.$emit({ left: this.left, top: this.top, distance: distance })
+      this.$emit('on-drag-stop', {
+        left: this.left,
+        top: this.top,
+        distance: distance
+      })
 
       if (!this.isAnimating) {
         distance > this.throwTriggerDistance
@@ -171,34 +198,37 @@ Vue.component('fly-card', {
       const angle = Math.atan2(this.top - 0, this.left - 0)
 
       this.$emit('on-throw-start')
+      this.isThrowed = true
       this.isAnimating = true
       this.left = Math.cos(angle) * this.throwDistance
       this.top = Math.sin(angle) * this.throwDistance
       setTimeout(() => {
-        this.isAnimating = false
         this.$emit('on-throw-done')
         this.resetAllCard()
       }, 400)
     },
 
     makeCardBack () {
-      this.isAnimating = true
       this.left = 0
       this.top = 0
+      this.isAnimating = true
 
       setTimeout(() => {
+        this.$emit('on-throw-fail')
         this.isAnimating = false
-        this.$emit('on-throw-cancel')
-        this.resetAllCard()
       }, 600)
     },
 
     resetAllCard () {
       this.left = 0
       this.top = 0
-      this.startLeft = 0
-      this.startTop = 0
+      this.isAnimating = false
+      this.isThrowed = false
     }
+  },
+
+  mounted () {
+    this.resetAllCard()
   }
 })
 
@@ -223,14 +253,52 @@ new Vue({
         {
           image: './images/5.jpg'
         }
-      ]
+      ],
+      actionName: null
+    }
+  },
+
+  computed: {
+    showCards () {
+      return this.cards.slice(0, 4)
     }
   },
 
   methods: {
+    handleDragStart () {
+      console.log('handleDragStart')
+    },
+
+    handleDragMove (e) {
+      if (e.left < -10) {
+        this.actionName = '不喜欢'
+      } else if (e.left > 10) {
+        this.actionName = '喜欢'
+      } else {
+        this.actionName = null
+      }
+    },
+
+    handleDragStop () {
+      console.log('handleDragStop')
+      this.actionName = null
+    },
+
+    handleThrowStart () {
+      console.log('handleThrowStart')
+    },
+
     handleThrowDone () {
-      const [c, ...rest] = this.cards
-      this.cards = [...rest, c]
+      this.cards.shift()
+      this.cards.push({
+        image: `https://picsum.photos/260/300?random=${Math.floor(
+          Math.random() * 1000
+        )}`
+      })
+    },
+
+    handleThrowFail () {
+      console.log('handleThrowFail')
     }
   }
 })
