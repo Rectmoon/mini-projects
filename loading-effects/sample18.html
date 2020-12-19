@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .loading,
+      .loading::before,
+      .loading::after {
+        position: absolute;
+        height: 1.2em;
+        width: 1.2em;
+        background: #717790;
+        border-radius: 50%;
+        animation: loading 2s infinite;
+      }
+
+      .loading {
+        left: 50%;
+        margin: 10em 0 10em -0.6em;
+      }
+
+      .loading::before,
+      .loading::after {
+        content: "";
+      }
+
+      .loading::before {
+        left: -2.3em;
+      }
+
+      .loading::after {
+        left: 2.3em;
+      }
+
+      @keyframes loading {
+        0% {
+          top: 0;
+          transform: rotate(0deg);
+        }
+        50% {
+          top: -3.8em;
+          transform: rotate(-180deg);
+        }
+        100% {
+          top: 0;
+          transform: rotate(-1turn);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="loading"></div>
+  </body>
+</html>
