@@ -1,5 +1,44 @@
 Vue.component('fly-card', {
-  template: '#fly-card',
+  template: `
+    <div class='fly-card-wrapper' :style="flyCardWrapperStyle">
+      <div
+        style="z-index: 13"
+        :style="{...firstCardStyle, borderRadius: borderRadius + 'px', background: cardBackground}"
+        class="fly-card"
+        :class="firstCardClass"
+        @touchstart="touchStart"
+        @touchmove="touchMove"
+        @touchcancel="touchCancel"
+        @touchend="touchCancel"
+      >
+        <slot name='card-0'></slot>
+      </div>
+
+      <div class="fly-card"
+        style="z-index: 12"
+        :style="{...secondCardStyle, borderRadius: borderRadius + 'px', background: cardBackground}"
+        :class="{'has-animation': isAnimating}"
+      >
+        <slot name='card-1'></slot>
+      </div>
+
+      <div class="fly-card"
+        style="z-index: 11"
+        :style="{...thirdCardStyle, borderRadius: borderRadius + 'px', background: cardBackground}"
+        :class="{'has-animation': isAnimating}"
+      >
+        <slot name='card-2'></slot>
+      </div>
+
+      <div class="fly-card"
+        style="z-index: 10"
+        :style="{...forthCardStyle, borderRadius: borderRadius + 'px', background: cardBackground}"
+        :class="{'has-animation': isAnimating}"
+      >
+        <slot name='card-3'></slot>
+      </div>
+    </div>
+  `,
 
   props: {
     // 正常卡片宽度
@@ -51,6 +90,12 @@ Vue.component('fly-card', {
     throwDistance: {
       type: Number,
       default: 1000
+    },
+    // 卡片拖拽方向
+    dragDirection: {
+      type: String,
+      default: 'all',
+      validator: value => ['all', 'horizontal', 'vertical'].includes(value)
     }
   },
 
@@ -163,8 +208,10 @@ Vue.component('fly-card', {
       if (!this.isAnimating) {
         const [{ clientX, clientY }] = e.touches
 
-        this.left = clientX - this.startLeft
-        this.top = clientY - this.startTop
+        ;['all', 'horizontal'].includes(this.dragDirection) &&
+          (this.left = clientX - this.startLeft)
+        ;['all', 'vertical'].includes(this.dragDirection) &&
+          (this.top = clientY - this.startTop)
         this.$emit('on-drag-move', {
           left: this.left,
           top: this.top,
@@ -229,76 +276,5 @@ Vue.component('fly-card', {
 
   mounted () {
     this.resetAllCard()
-  }
-})
-
-new Vue({
-  el: '#app',
-
-  data () {
-    return {
-      cards: [
-        {
-          image: './images/1.jpg'
-        },
-        {
-          image: './images/2.jpg'
-        },
-        {
-          image: './images/3.jpg'
-        },
-        {
-          image: './images/4.jpg'
-        },
-        {
-          image: './images/5.jpg'
-        }
-      ],
-      actionName: null
-    }
-  },
-
-  computed: {
-    showCards () {
-      return this.cards.slice(0, 4)
-    }
-  },
-
-  methods: {
-    handleDragStart () {
-      console.log('handleDragStart')
-    },
-
-    handleDragMove (e) {
-      if (e.left < -10) {
-        this.actionName = '不喜欢'
-      } else if (e.left > 10) {
-        this.actionName = '喜欢'
-      } else {
-        this.actionName = null
-      }
-    },
-
-    handleDragStop () {
-      console.log('handleDragStop')
-      this.actionName = null
-    },
-
-    handleThrowStart () {
-      console.log('handleThrowStart')
-    },
-
-    handleThrowDone () {
-      this.cards.shift()
-      this.cards.push({
-        image: `https://picsum.photos/260/300?random=${Math.floor(
-          Math.random() * 1000
-        )}`
-      })
-    },
-
-    handleThrowFail () {
-      console.log('handleThrowFail')
-    }
   }
 })

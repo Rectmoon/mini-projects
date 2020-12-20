@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TanTan Card</title>
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .action-name {
+      color: #fff;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 10px 20px;
+      font-size: 24px;
+      position: absolute;
+      z-index: 999;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+  <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.min.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <div v-if='actionName' class='action-name'>{{actionName}}</div>
+    <fly-card :padding-left='12' :padding-top='8' :throw-trigger-distance='160' :card-background="'rgba(0, 0, 0, .38)'"
+      @on-drag-start="handleDragStart" @on-drag-move="handleDragMove" @on-drag-stop="handleDragStop"
+      @on-throw-start="handleThrowStart" @on-throw-done="handleThrowDone" @on-throw-fail="handleThrowFail">
+      <div v-for="(card, index) in showCards" :key="index" :slot="`card-${index}`"
+        style="width: 100%;height:100%;font-size: 0;"><img :src="card.image"></div>
+    </fly-card>
+  </div>
+  <script src='script.js'></script>
+
+  <script>
+    new Vue({
+      el: '#app',
+
+      data() {
+        return {
+          cards: [
+            {
+              image: './images/1.jpg'
+            },
+            {
+              image: './images/2.jpg'
+            },
+            {
+              image: './images/3.jpg'
+            },
+            {
+              image: './images/4.jpg'
+            },
+            {
+              image: './images/5.jpg'
+            }
+          ],
+          actionName: null
+        }
+      },
+
+      computed: {
+        showCards() {
+          return this.cards.slice(0, 4)
+        }
+      },
+
+      methods: {
+        handleDragStart() {
+          console.log('handleDragStart')
+        },
+
+        handleDragMove(e) {
+          if (e.left < -10) {
+            this.actionName = '不喜欢'
+          } else if (e.left > 10) {
+            this.actionName = '喜欢'
+          } else {
+            this.actionName = null
+          }
+        },
+
+        handleDragStop() {
+          console.log('handleDragStop')
+          this.actionName = null
+        },
+
+        handleThrowStart() {
+          console.log('handleThrowStart')
+        },
+
+        handleThrowDone() {
+          this.cards.shift()
+          this.cards.push({
+            image: `https://picsum.photos/260/300?random=${Math.floor(
+              Math.random() * 1000
+            )}`
+          })
+        },
+
+        handleThrowFail() {
+          console.log('handleThrowFail')
+        }
+      }
+    })
+
+  </script>
+</body>
+
+</html>

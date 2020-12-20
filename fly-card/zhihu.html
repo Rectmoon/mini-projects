@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZhiHu Card</title>
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .flex {
+      display: flex;
+    }
+
+    .zhihu-card {
+      width: 100%;
+      height: 100%;
+      padding: 10px;
+      flex-flow: column nowrap;
+      justify-content: space-between;
+    }
+
+    .zhihu-card>div:nth-child(1) {
+      font-size: 24px;
+      font-weight: 600;
+      flex: 1;
+      overflow-y: scroll;
+      margin-bottom: 10px;
+    }
+
+    .zhihu-card>div:nth-child(2)>div:nth-child(1) {
+      flex: 1;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .zhihu-card>div:nth-child(2)>div:nth-child(2)>button:nth-child(2) {
+      margin-left: 5px;
+    }
+
+    button {
+      height: 24px;
+      line-height: 24px;
+      font-size: 12px;
+    }
+  </style>
+  <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.min.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <fly-card :card-width="300" :card-height="160" :border-radius="0" :throw-trigger-distance='100'
+      drag-direction="horizontal" @on-throw-done="handleThrowDone">
+      <div v-for="(card, index) in showCards" :key="index" :slot="`card-${index}`" class="zhihu-card flex">
+        <div>{{card.title}}</div>
+        <div class="flex">
+          <div>{{card.followcount}} 关注</div>
+          <div class="flex">
+            <button disabled="">忽略</button>
+            <button type="primary">回答</button>
+          </div>
+        </div>
+      </div>
+    </fly-card>
+  </div>
+  <script src='script.js'></script>
+  <script>
+    new Vue({
+      el: '#app',
+
+      data() {
+        return {
+          cards: [
+            {
+              title: "js数组怎么遍历删除指定元素，最后全部删除？",
+              followcount: 6
+            },
+            {
+              title: "前端自学，前后端的交互应该学哪些，要重点学哪里？",
+              followcount: 13
+            },
+            {
+              title: "我们花那么多时间在游戏《塞尔达传说：旷野之息》里，到底得到了什么？",
+              followcount: 29
+            },
+            {
+              title: "跪求这个图片用HTML，CSS如何做出来？",
+              followcount: 6
+            }
+          ],
+        }
+      },
+
+      computed: {
+        showCards() {
+          return this.cards.slice(0, 4)
+        }
+      },
+
+      methods: {
+        handleThrowDone(obj) {
+          this.cards.splice(0, 1);
+        }
+      }
+    })
+
+  </script>
+</body>
+
+</html>
