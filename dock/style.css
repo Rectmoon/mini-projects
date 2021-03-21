@@ -21,14 +21,14 @@ body {
   justify-content: center;
   align-items: center;
   background-color: #eee;
-  height: 8rem;
+  height: 6rem;
 }
 
 li {
   position: relative;
   top: calc((3rem * var(--scale) - 3rem) / -2);
   list-style: none;
-  padding: 0 0.5rem;
+  margin: 0 0.5rem;
   transition: 15ms all ease-out;
 }
 
