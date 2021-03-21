@@ -1,0 +1,38 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+#dock {
+  --scale: 1;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: #eee;
+  height: 8rem;
+}
+
+li {
+  position: relative;
+  top: calc((3rem * var(--scale) - 3rem) / -2);
+  list-style: none;
+  padding: 0 0.5rem;
+  transition: 15ms all ease-out;
+}
+
+li img {
+  width: calc(var(--scale) * 3rem);
+  vertical-align: middle;
+}
