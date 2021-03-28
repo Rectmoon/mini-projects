@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fading Text</title>
+
+  <style>
+    body {
+      background: #000;
+      margin: 0;
+      height: 300vh;
+    }
+
+    .sticky {
+      position: sticky;
+      top: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      --percentage: 0;
+
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 0;
+      font-size: 48px;
+      letter-spacing: -.3px;
+      background-image: linear-gradient(75deg,
+          rgba(255, 255, 255, 1) 0%,
+          rgba(255, 255, 255, 1) 33.33%,
+          rgba(255, 255, 255, 0) 66.67%,
+          rgba(255, 255, 255, 0) 100%);
+      background-size: 300% 100%;
+      background-position-x: calc(100% - var(--percentage));
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="sticky">
+    <h1>
+      Learn once, Write everywhere.
+    </h1>
+  </div>
+
+  <script>
+    const h1 = document.querySelector('h1')
+
+    document.addEventListener('scroll', () => {
+      h1.style.setProperty('--percentage', `${document.documentElement.scrollTop / (
+        document.documentElement.scrollHeight - document.documentElement.clientHeight
+      ) * 100}%`)
+    })
+  </script>
+</body>
+
+</html>
