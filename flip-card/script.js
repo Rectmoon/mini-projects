@@ -1,10 +1,10 @@
-Vue.component('fly-card', {
+Vue.component('flip-card', {
   template: `
-    <div class='fly-card-wrapper' :style="flyCardWrapperStyle">
+    <div class='flip-card-wrapper' :style="flyCardWrapperStyle">
       <div
         style="z-index: 13"
         :style="{...firstCardStyle, borderRadius: borderRadius + 'px', background: cardBackground}"
-        class="fly-card"
+        class="flip-card"
         :class="firstCardClass"
         @touchstart="touchStart"
         @touchmove="touchMove"
@@ -14,7 +14,7 @@ Vue.component('fly-card', {
         <slot name='card-0'></slot>
       </div>
 
-      <div class="fly-card"
+      <div class="flip-card"
         style="z-index: 12"
         :style="{...secondCardStyle, borderRadius: borderRadius + 'px', background: cardBackground}"
         :class="{'has-animation': isAnimating}"
@@ -22,7 +22,7 @@ Vue.component('fly-card', {
         <slot name='card-1'></slot>
       </div>
 
-      <div class="fly-card"
+      <div class="flip-card"
         style="z-index: 11"
         :style="{...thirdCardStyle, borderRadius: borderRadius + 'px', background: cardBackground}"
         :class="{'has-animation': isAnimating}"
@@ -30,7 +30,7 @@ Vue.component('fly-card', {
         <slot name='card-2'></slot>
       </div>
 
-      <div class="fly-card"
+      <div class="flip-card"
         style="z-index: 10"
         :style="{...forthCardStyle, borderRadius: borderRadius + 'px', background: cardBackground}"
         :class="{'has-animation': isAnimating}"

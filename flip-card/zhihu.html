@@ -49,7 +49,7 @@
 
 <body>
   <div id="app">
-    <fly-card :card-width="300" :card-height="160" :border-radius="0" :throw-trigger-distance='100'
+    <flip-card :card-width="300" :card-height="160" :border-radius="0" :throw-trigger-distance='100'
       drag-direction="horizontal" @on-throw-done="handleThrowDone">
       <div v-for="(card, index) in showCards" :key="index" :slot="`card-${index}`" class="zhihu-card flex">
         <div>{{card.title}}</div>
@@ -61,7 +61,7 @@
           </div>
         </div>
       </div>
-    </fly-card>
+    </flip-card>
   </div>
   <script src='script.js'></script>
   <script>

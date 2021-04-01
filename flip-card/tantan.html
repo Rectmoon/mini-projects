@@ -26,12 +26,12 @@
 <body>
   <div id="app">
     <div v-if='actionName' class='action-name'>{{actionName}}</div>
-    <fly-card :padding-left='12' :padding-top='8' :throw-trigger-distance='160' :card-background="'rgba(0, 0, 0, .38)'"
+    <flip-card :padding-left='12' :padding-top='8' :throw-trigger-distance='160' :card-background="'rgba(0, 0, 0, .38)'"
       @on-drag-start="handleDragStart" @on-drag-move="handleDragMove" @on-drag-stop="handleDragStop"
       @on-throw-start="handleThrowStart" @on-throw-done="handleThrowDone" @on-throw-fail="handleThrowFail">
       <div v-for="(card, index) in showCards" :key="index" :slot="`card-${index}`"
         style="width: 100%;height:100%;font-size: 0;"><img :src="card.image"></div>
-    </fly-card>
+    </flip-card>
   </div>
   <script src='script.js'></script>
 
