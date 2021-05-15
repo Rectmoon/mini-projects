@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>sliding list</title>
+
+  <style>
+    :root {
+      --device-width: 770px;
+      --device-height: 1336px;
+      --ui-width: 640px;
+      font-size: 15px;
+    }
+
+    body {
+      background-color: #000;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      padding: 4rem 0;
+    }
+
+    header {
+      color: #6e6e73;
+      text-align: center;
+      font-size: 4.5rem;
+      margin: 6rem 0;
+    }
+
+    header h2 {
+      font-weight: 600;
+      margin: 0;
+    }
+
+    header p {
+      margin: 0;
+      color: #fff;
+    }
+
+    #iphone {
+      position: relative;
+      width: var(--device-width);
+      height: var(--device-height);
+    }
+
+    #hardware {
+      width: 100%;
+      height: 100%;
+      background-image: url(images/iphone12-5g_on_phone.webp);
+      background-size: var(--device-width) var(--device-height);
+      mask-image: url(images/iphone12-5g_on_phone_mask.png);
+      -webkit-mask-image: url(images/iphone12-5g_on_phone_mask.png);
+      mask-size: var(--device-width) var(--device-height);
+      -webkit-mask-size: var(--device-width) var(--device-height);
+    }
+
+    #ui {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      --progress: 0;
+    }
+
+    #ui .top-ui {
+      display: block;
+      width: var(--ui-width);
+      margin: 70px auto 0;
+      padding-bottom: 30px;
+      border-bottom: 1px solid #222;
+    }
+
+    #ui ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    #ui ul li img {
+      display: block;
+      width: var(--ui-width);
+      margin: 10px auto;
+      border-bottom: 1px solid #222;
+      padding-bottom: 10px;
+      transform: scale(calc(1.8 - 0.8 * var(--progress))) translateY(calc(-60px * (1 - var(--progress))));
+      opacity: var(--progress);
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h2>Superfast wireless</h2>
+    <p>Hello 5G.</p>
+  </header>
+
+  <section id="iphone">
+    <div id="hardware"></div>
+    <div id="ui">
+      <img src="https://assets.codepen.io/2002878/iphone12-5g_top_ui.jpg" class="top-ui" alt="">
+      <ul>
+        <li><img src="images/iphone12-5g_show_01.jpg" /></li>
+        <li><img src="images/iphone12-5g_show_02.jpg" /></li>
+        <li><img src="images/iphone12-5g_show_03.webp" /></li>
+        <li><img src="images/iphone12-5g_show_04.webp" /></li>
+        <li><img src="images/iphone12-5g_show_05.webp" /></li>
+        <li><img src="images/iphone12-5g_show_06.webp" /></li>
+        <li><img src="images/iphone12-5g_show_07.webp" /></li>
+      </ul>
+    </div>
+  </section>
+
+
+  <script>
+    const root = document.documentElement
+    const lis = document.querySelectorAll('#ui ul li')
+    const len = lis.length
+
+    document.addEventListener('scroll', (e) => {
+      const scrolled = root.scrollTop / (root.scrollHeight - root.clientHeight)
+
+      lis.forEach((li, index) => {
+        const percent = scrolled * len - index
+        const progress = percent >= 1 ? 1 : percent <= 0 ? 0 : percent
+
+        li.style.setProperty('--progress', progress)
+      })
+    })
+  </script>
+</body>
+
+</html>
