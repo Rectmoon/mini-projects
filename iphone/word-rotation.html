@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Word Rotation</title>
+
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    h2 {
+      width: 980px;
+      font-size: 100px;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: #1d1d1f;
+    }
+
+    .mask {
+      height: 106px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mask span {
+      display: block;
+      position: absolute;
+      box-sizing: border-box;
+      top: 100%;
+      height: 100%;
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .mask span[data-show] {
+      transform: translateY(-100%);
+      transition: .5s transform ease-in-out;
+    }
+
+    .mask span[data-up] {
+      transform: translateY(-200%);
+      transition: .5s transform ease-in-out;
+    }
+
+    .mask span:nth-child(1) {
+      background-image: linear-gradient(45deg, #0ecffe 50%, #07a6f1);
+    }
+
+    .mask span:nth-child(2) {
+      background-image: linear-gradient(45deg, #18e198 50%, #0ec15d);
+    }
+
+    .mask span:nth-child(3) {
+      background-image: linear-gradient(45deg, #8a7cfb 50%, #633e9c);
+    }
+
+    .mask span:nth-child(4) {
+      background-image: linear-gradient(45deg, #fa7671 50%, #f45f7f);
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Turn your living room into
+    <section class="mask">
+      <span data-show>a theater.</span>
+      <span>a gym.</span>
+      <span>a concert hall.</span>
+      <span>an arcade.</span>
+    </section>
+  </h2>
+
+  <script>
+    setInterval(() => {
+      const show = document.querySelector('span[data-show]')
+      const next = show.nextElementSibling || document.querySelector('span:first-child')
+      const up = document.querySelector('span[data-up]')
+
+
+      if (up) {
+        up.removeAttribute('data-up')
+      }
+
+      show.removeAttribute('data-show')
+      show.setAttribute('data-up', '')
+      next.setAttribute('data-show', '')
+    }, 2000);
+  </script>
+</body>
+
+</html>
