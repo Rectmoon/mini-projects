@@ -11,6 +11,9 @@
   --var-222: #222;
   --var-444: #444;
   --var-555: #555;
+  --var-777: #777;
+  --var-eee: #eee;
+  --var-ccc: #ccc;
 }
 
 body {
@@ -84,7 +87,7 @@ body {
   right: 50px;
   width: 80px;
   height: 80px;
-  background: linear-gradient(#eee, #ccc, #eee);
+  background: linear-gradient(var(--var-eee), var(--var-ccc), var(--var-eee));
   border: 3px solid var(--var-dark);
   border-radius: 10px;
   display: flex;
@@ -96,7 +99,7 @@ body {
   position: relative;
   width: 25px;
   height: 40px;
-  background: linear-gradient(#777, var(--var-light), #777);
+  background: linear-gradient(var(--var-777), var(--var-light), var(--var-777));
   border-radius: 6px;
   border: 2px solid var(--var-dark);
   cursor: pointer;
