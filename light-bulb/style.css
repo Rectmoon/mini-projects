@@ -57,25 +57,21 @@ body {
 
 .bulb span {
   position: absolute;
-}
-
-.bulb span:nth-child(1) {
   top: -16px;
-  left: -4px;
   width: 30px;
   height: 30px;
   background-color: transparent;
+}
+
+.bulb span:nth-child(1) {
+  left: -4px;
   transform: rotate(342deg);
   box-shadow: 20px 20px 0 10px var(--var-444);
   border-bottom-right-radius: 40px;
 }
 
 .bulb span:nth-child(2) {
-  top: -16px;
   right: -4px;
-  width: 30px;
-  height: 30px;
-  background-color: transparent;
   transform: rotate(17deg);
   box-shadow: -20px 20px 0 10px var(--var-444);
   border-bottom-left-radius: 40px;
@@ -130,6 +126,7 @@ body.on .bulb {
     0 0 150px var(--var-light), 0 0 200px var(--var-light),
     0 0 250px var(--var-light), 0 0 300px var(--var-light),
     0 0 350px var(--var-light);
+  transition: box-shadow 0.3s, background-color 0s;
 }
 
 body.on .bulb span:nth-child(1) {
