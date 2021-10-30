@@ -1,0 +1,159 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --var-light: #fff;
+  --var-dark: #000;
+  --var-111: #111;
+  --var-222: #222;
+  --var-444: #444;
+  --var-555: #555;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: var(--var-222);
+}
+
+.wire {
+  position: absolute;
+  left: calc(50% - 2px);
+  bottom: 50%;
+  width: 4px;
+  height: 60vh;
+  background-color: var(--var-dark);
+  z-index: 1;
+}
+
+.bulb {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  background-color: var(--var-444);
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.bulb::before {
+  content: "";
+  position: absolute;
+  left: 22.5px;
+  top: -50px;
+  width: 35px;
+  height: 80px;
+  background-color: var(--var-444);
+  border-top: 30px solid var(--var-dark);
+  border-radius: 10px;
+}
+
+.bulb span {
+  position: absolute;
+}
+
+.bulb span:nth-child(1) {
+  top: -16px;
+  left: -4px;
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  transform: rotate(342deg);
+  box-shadow: 20px 20px 0 10px var(--var-444);
+  border-bottom-right-radius: 40px;
+}
+
+.bulb span:nth-child(2) {
+  top: -16px;
+  right: -4px;
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  transform: rotate(17deg);
+  box-shadow: -20px 20px 0 10px var(--var-444);
+  border-bottom-left-radius: 40px;
+}
+
+.switch {
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(#eee, #ccc, #eee);
+  border: 3px solid var(--var-dark);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.switch .btn {
+  position: relative;
+  width: 25px;
+  height: 40px;
+  background: linear-gradient(#777, var(--var-light), #777);
+  border-radius: 6px;
+  border: 2px solid var(--var-dark);
+  cursor: pointer;
+}
+
+.switch .btn::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 85%;
+  background: linear-gradient(var(--var-light), var(--var-light));
+  border-radius: 4px;
+}
+
+#audio {
+  display: none;
+}
+
+/* body on */
+body.on {
+  background: radial-gradient(var(--var-555), var(--var-111));
+}
+
+body.on .bulb {
+  background-color: var(--var-light);
+  box-shadow: 0 0 50px var(--var-light), 0 0 100px var(--var-light),
+    0 0 150px var(--var-light), 0 0 200px var(--var-light),
+    0 0 250px var(--var-light), 0 0 300px var(--var-light),
+    0 0 350px var(--var-light);
+}
+
+body.on .bulb span:nth-child(1) {
+  box-shadow: 20px 20px 0 10px var(--var-light);
+}
+
+body.on .bulb span:nth-child(2) {
+  box-shadow: -20px 20px 0 10px var(--var-light);
+}
+
+body.on .bulb::before {
+  background-color: var(--var-light);
+}
+
+body.on .bulb::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 120px;
+  background-color: var(--var-light);
+  border-radius: 50%;
+  filter: blur(40px);
+}
+
+body.on .switch .btn::before {
+  top: 15%;
+}
