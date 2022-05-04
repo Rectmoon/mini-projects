@@ -37,6 +37,7 @@ formSteps.forEach(step => {
 
 function showCurrentStep() {
   formSteps.forEach((step, index) => {
+    step.classList.toggle('fade', index !== currentStep)
     step.classList.toggle('active', index === currentStep)
   })
 }

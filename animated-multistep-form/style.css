@@ -12,11 +12,14 @@
   padding: 0.5rem;
   max-width: 300px;
   margin: 0 auto;
-  animation: fade 250ms ease-in-out forwards;
 }
 
 .card.active {
   animation: slide 250ms 125ms ease-in-out both;
+}
+
+.card.fade {
+  animation: fade 250ms ease-in-out forwards;
 }
 
 .form-group {
@@ -50,7 +53,6 @@
 
 .hide {
   display: none;
-  animation: none !important;
 }
 
 @keyframes slide {
