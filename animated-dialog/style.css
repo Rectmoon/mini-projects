@@ -1,0 +1,84 @@
+.modal {
+  background: #fff;
+  color: #222;
+  border: 0;
+  border-radius: 0.25rem;
+}
+
+.modal::backdrop {
+  background: rgb(0 0 0 / 0.5);
+  opacity: 0;
+}
+
+.modal[open] {
+  animation: zoom-in 500ms forwards, fade-in 500ms forwards;
+  transform-origin: center center;
+}
+
+.modal[open]::backdrop {
+  animation: fade-in 500ms forwards;
+}
+
+.modal[closing] {
+  display: block;
+  animation: zoom-out 500ms forwards, fade-out 500ms forwards;
+  pointer-events: none;
+  inset: 0;
+}
+
+.modal[closing]::backdrop {
+  animation: fade-out 300ms forwards;
+}
+
+.modal {
+  max-width: 50ch;
+}
+
+.modal > * {
+  margin: 0 0 0.5rem 0;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes zoom-in {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes zoom-out {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
